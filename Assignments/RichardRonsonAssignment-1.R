@@ -1,5 +1,5 @@
 # Question 0:
-firstname<- "Richard" 
+firstname<- "Richard"
 lastname<- "Ronson"
 print(paste(firstname,lastname))
 studentID<-'1505029'
