@@ -31,7 +31,7 @@ print(RichardRonsonAssignment2$s1d)
 
 save(RichardRonsonAssignment2,file="Assignments/RichardRonsonAssignment2.RData")
 
-#Question 2: 
+#Question 2:
 df.td <- read.table(
   file = "https://github.com/EconomiCurtis/econ294_2015/raw/master/data/NHIS_2007_TSV.txt",
   sep = "\t",
@@ -96,7 +96,7 @@ print(RichardRonsonAssignment2$s3d)
 RichardRonsonAssignment2$s3e<-paste(arr[3,3,2],arr[3,3,1],arr[3,1,1],sep="")
 print(RichardRonsonAssignment2$s3e)
 #ric for Richard 
- 
+
 #Question 4:
 library(foreign)
 org_example<- read.dta("https://github.com/EconomiCurtis/econ294_2015/raw/master/data/org_example.dta")
