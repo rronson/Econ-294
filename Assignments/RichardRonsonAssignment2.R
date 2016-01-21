@@ -29,8 +29,6 @@ print(RichardRonsonAssignment2$s1d)
 #' The summary of the prices are:Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
 #                                420     450     600     650     825     980       1 
 
-save(RichardRonsonAssignment2,file="Assignments/RichardRonsonAssignment2.RData")
-
 #Question 2:
 df.td <- read.table(
   file = "https://github.com/EconomiCurtis/econ294_2015/raw/master/data/NHIS_2007_TSV.txt",
@@ -109,3 +107,5 @@ RichardRonsonAssignment2$s4<-aggregate(org_example$rw,list(Year=org_example$year
 print(RichardRonsonAssignment2$s4)
 dim(RichardRonsonAssignment2$s4)
 #dimensions are 420 by 4. x= average rw.
+
+save(RichardRonsonAssignment2,file="Assignments/RichardRonsonAssignment2.RData")
