@@ -74,7 +74,7 @@ print(RichardRonsonAssignment2$s2i)
 
 #Question 3: 
 vec<- c(letters, LETTERS)
-RichardRonsonAssignment2$s3a<-paste(vec[seq(2,52,2)],collapse="")
+RichardRonsonAssignment2$s3a<-paste(vec[seq(2,52,2)])
 print(RichardRonsonAssignment2$s3a)
 #"bdfhjlnprtvxzBDFHJLNPRTVXZ"
 
