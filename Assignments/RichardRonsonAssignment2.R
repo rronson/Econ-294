@@ -74,9 +74,10 @@ print(RichardRonsonAssignment2$s2i)
 
 #Question 3: 
 vec<- c(letters, LETTERS)
-RichardRonsonAssignment2$s3a<-paste(vec[seq(2,52,2)],collapse="")
+RichardRonsonAssignment2$s3a<-paste(vec[seq(2,52,2)])
 print(RichardRonsonAssignment2$s3a)
-#"bdfhjlnprtvxzBDFHJLNPRTVXZ"
+#' [1] "b" "d" "f" "h" "j" "l" "n" "p" "r" "t" "v" "x" "z" "B" "D" "F" "H" "J" "L" "N" "P" "R"
+#'[23] "T" "V" "X" "Z"
 
 RichardRonsonAssignment2$s3b<-paste(vec[c(44,9,3)],collapse="")
 print(RichardRonsonAssignment2$s3b)
