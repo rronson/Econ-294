@@ -6,7 +6,7 @@ email<-"rronson@ucsc.edu"
 assignment<-"Econ 294A Assignment 3"
 print(paste(firstname,lastname))
 print(studentID)
-print(email)
+print(email) 
 print(assignment)
 #####################################################################################
 #Question 1
@@ -35,7 +35,7 @@ print(nrow(df.ex.2))
 #Question 3
 df.ex.3a<-df.ex%>%
   dplyr::arrange(year,month)
-View(df.ex.3a)
+View(df.ex.3a) 
 #Observations arranged in asscending order from January 1983 to December 2013.
 #####################################################################################
 #Question 4
@@ -94,7 +94,7 @@ paste(print(max(df.ex.6$mean.rw)))
 
 df.ex.6b<-df.ex.6%>%
   dplyr::select(year,month,state,mean.rw)%>%
-  filter(mean.rw>=40.62581)
+  filter(mean.rw==max(df.ex.6$mean.rw))
 
 print(df.ex.6b)
 # 2013    12     DC 40.62582
