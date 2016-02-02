@@ -6,7 +6,7 @@ email<-"rronson@ucsc.edu"
 assignment<-"Econ 294A Assignment 3"
 print(paste(firstname,lastname))
 print(studentID)
-print(email)
+print(email) 
 print(assignment)
 #####################################################################################
 #Question 1
