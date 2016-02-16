@@ -36,18 +36,24 @@ print(nrow(flights.2b))
 #Part C
 flights.3c1<-subset(flights.df,arr_delay==2*dep_delay)
 #all delays including zero(all types positive,negative, and zero).
+
 flights.3c2<-subset(flights.df,arr_delay==2*dep_delay & arr_delay>0)
 #all delays greater that 0 (actual delays).
+
 flights.3c3<-subset(flights.df,arr_delay==2*dep_delay & arr_delay!=0)
 #all delays that are not equl to zero(both positive and negative).
 
-#I was not sure which you were looking for so I just did all cases.
+#I was not sure which you were looking for so I just did all the cases I could think of.
+
 print(nrow(flights.3c1))
 #There are 7,058 observations. For all types of delays(positive,negative, and zero).
+
 print(nrow(flights.3c2))
 #There are 1,742 observations. For all actual delays (positive delays).
+
 print(nrow(flights.3c3))
 #There are 6,299 observations. For all delays excluding zero.
+
 #############################################################################################
 #Question 4
 library(dplyr)
@@ -355,5 +361,5 @@ df.11d<-df.d%>%
 df.11d[df.11d=="NA.NA.NA"]<-NA
 
 print(df.11d)   
-
+ 
 #############################################################################################
