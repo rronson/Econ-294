@@ -351,6 +351,7 @@ df.d
 df.11d<-df.d%>%
   tidyr::unite(demo,...=sex, age, city,sep=".")
   
+
 df.11d[df.11d=="NA.NA.NA"]<-NA
 
 print(df.11d)   
