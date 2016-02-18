@@ -262,6 +262,7 @@ nrow(df.9d)
 #There are 3378 observations.
 #Yes there are NA's because full_join includes all observations from both tables x and y.
 #There are not matches for those locations which is why there is NA's in the table.
+
 #############################################################################################
 #Question 10
 
@@ -285,7 +286,7 @@ hourly_delay.10<-flights.df10%>%
 df.10<-hourly_delay.10%>% 
   dplyr::left_join(weather.df, by = c("date", "hour") ) 
 #Merged new table with weather.df
-
+ 
 df.10.2<-df.10%>%
   dplyr::arrange(desc(hourly_delay))%>% 
   select(hourly_delay,5:16)%>%  
