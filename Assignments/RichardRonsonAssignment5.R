@@ -55,9 +55,8 @@ plot3a<-ggplot(
         qr1st=quantile(rw, probs = 0.25, na.rm = T, names = T, type = 7),
         qr3rd=quantile(rw, probs = 0.75 , na.rm = T, names = T, type = 7), 
         dec1st=quantile(rw, probs = 0.1, na.rm = T, names = T, type = 5) ,
-        dec9th=quantile(rw, probs = 0.9, na.rm = T, names = T, type = 5),
-        total = n()
-      )  %>% select(date, Median.RW, qr1st, qr3rd, dec1st, dec9th, educ)),
+        dec9th=quantile(rw, probs = 0.9, na.rm = T, names = T, type = 5)
+      )),
   aes(
     x = date, 
     y = Median.RW,
