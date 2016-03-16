@@ -1,0 +1,229 @@
+---
+title: "Econ 294A Final"
+author: "Richard Ronson"
+date: "March 14, 2016"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(cache=TRUE)
+```
+
+```{r package-load, include=F,message=FALSE}
+library(dplyr)
+library(knitr)
+library(stargazer)
+library(RSQLite)
+library(ggplot2)
+library(nycflights13)
+```
+
+##Part A
+
+```{r,echo=F,message=F,include=F}
+db <- nycflights13_sqlite()
+a<-left_join(
+  tbl(db, "flights"),
+  tbl(db, "weather"),
+  by = c("year","month","day","hour"))%>% 
+  collect() %>%
+  mutate(canceled = is.na(arr_time))
+
+a$month<-as.factor(a$month)
+```
+
+```{r,echo=F,warning = F,include=T}
+A1.reg<-lm(dep_delay~temp+humid+wind_speed+precip+pressure+visib+wind_dir,a)
+A2.reg<-lm(canceled~temp+humid+wind_speed+precip+pressure+visib+wind_dir,a)
+```
+
+```{r, warning=F,echo=F,fig.height = 3., fig.width=6, fig.cap = "Preciptations effect on Depature Delays"}
+
+a.plot<-ggplot(data = sample_n(a, 10000),aes(x=precip,y=dep_delay))
+a.plot+geom_point()+geom_line()
+```
+
+
+The plot above illustrates the most significant relationship of part A. This is between precipitation and depature delay.
+
+
+
+```{r,echo=F,header=F,results='asis'}
+stargazer(A1.reg,A2.reg,header=F,type='latex')
+```
+
+
+The regression results of Part A aimed to figure out the relationship between various 
+
+weather conditions with both delayed and cancelled flights. 
+
+All of the weather condtions were statistically significant at the 99% level in
+
+determining delayed depatures. Likewise only a few weather conditons played no
+
+signifcant role in leading to a cancelled flight. These conditions include: humidity, 
+
+wind speed and precipitation. I would like to take note of the most significant statistic 
+on table one which was the effect of precipitation on depature delay. This 
+
+was that on average holding all else constant as precipitation increases by 1 unit 
+
+depature delay will increase by 49.29 mins. This far and away was the greatest find of 
+
+the regression results of part A both in statistical signifiance and magnitude.
+
+(reference to table 1)
+
+##Part B
+```{r,echo=F,warning = F,include=F}
+b1.reg<-lm(dep_delay~month+day+hour,a)
+b2.reg<-lm(canceled~month+day+hour,a)
+```
+
+```{r, warning=F,echo=F,fig.height = 3., fig.width=6, fig.cap = "Time of Years Effect on Depature Delays"}
+
+a.plot<-ggplot(data = sample_n(a, 10000),aes(x=month,y=dep_delay))
+a.plot+geom_point()+geom_line()
+
+```
+
+
+
+The plot above illustrates the most significant relationship of part B. This is between time of year denoted by month and depature delay.
+
+
+
+```{r,echo=F, results='asis'}
+stargazer(b1.reg,b2.reg,header=F,type='latex')
+```
+
+
+The regression results of Part B strived to determine the relationship of time of
+
+day, week and year between both delayed and cancelled flights. With each month relative 
+
+to January as it is represented in the constant. Both month and hour are statistically
+
+significant in determining delayed depatures.The day of the week was not statistically
+
+significant in determining delayed depatures.In regards to months and cancellations all
+
+but 4 months were statistically significant.These months include March, August, October,
+
+and November. Also time of day and the day of the week were both statistically
+
+significant.In terms of magniture and statistical signifcance no month illustrated such a
+
+strong influence on depature delay as did july. On average holding all else constant if
+
+you were to fly in july you can expect departure delays to increase by 11.557 minutes.
+
+(reference to table 2)
+
+
+##Part C
+```{r,echo=F, message=F}
+a$dest<-as.factor(a$dest)
+```
+
+```{r,echo=T,warning = F,include=T}
+c1.reg<-lm(dep_delay~dest,a)
+c2.reg<-lm(canceled~dest,a)
+
+```
+
+```{r,include=F,warning=F,echo=F}
+summary(c1.reg)
+summary(c2.reg)
+#Much too large of a table to create so will just speak about the results of most revelant destinations.
+```
+
+
+
+In Part C I attempted to find relationships between various destinations with both
+
+depature delays and cancelled flights. The number of destinations is very large so I
+
+decided to dicuss the destinations with statistically signifcant relationships with
+
+departure delays and cancellations (I have omitted this table from the pdf because it 
+
+would have have taken up several pages in itself). I have instead depicted the models I
+
+created in order to determine the relationships.The most statistically significant
+
+relationships between destination and depature delays came from these destinations:
+
+BHM,CAE,DSM,OKC,RIC,TUL,and TYS. These were all statistically significant at a level
+
+greater than 99%. The most statistically significant relationships between destination
+
+and cancelled flights came from the following destinations: ALB, BDL, BGR, BHM, BNA, BWI,
+
+CAE, CHO, CHS, CLE, CMH, CVG, DAY, DCA, DSM, DTW, GRR,GSO, GSP, IAD, IND, JAC, LGA, 
+
+MCI, MEM, MHT, MSP, OKC, ORD, ORF, PHL, PIT, PVD, RDU,RIC, SAV, SDF, SRQ, TUL and TYS. 
+
+These destinations were all statistically significant at a level greater than 99%. In 
+
+other words there were quite a bit more destinations that had a statistically signifcant 
+
+relationship with cancelled flights.
+
+(table ommitted)
+
+
+##Part D
+```{r,echo=F,warning = F,include=F}
+db <- nycflights13_sqlite()
+
+
+d<-left_join(
+  tbl(db, "flights"),
+  tbl(db, "planes"),
+  by = "tailnum")%>% 
+  collect() %>%
+  mutate(canceled = is.na(arr_time))
+```
+
+```{r,echo=F,warning = F,include=T}
+d1.reg<-lm(dep_delay~engines+seats+engine,d)
+d2.reg<-lm(canceled~engines+seats+engine,d)
+```
+
+```{r, warning=F,echo=F,fig.height = 3.5, fig.width=6, fig.cap = "Time of Years Effect on Cancelled Flights"}
+
+a.plot<-ggplot(data = sample_n(d, 10000),aes(x=seats,y=canceled))
+a.plot+geom_point()+geom_line()
+
+```
+
+
+
+The plot above illustrates the most significant relationship of part D. This is between the number of seats on the plane and cancelled flights.
+
+
+
+```{r,echo=F, results='asis'}
+stargazer(d1.reg,d2.reg,header=F,type='latex')
+```
+
+
+
+Finally for Part D the regression model was designed to determine the effect of various
+
+plane characteristics on both depature delays and cancelled flights. Both the number of
+
+seats and engines were statistically significant in determining cancelled flights whereas 
+only the number of seats were statistically significant in determining depature delays.
+
+Overall the magnitude of the effects of the various plane characteristics are incredibly
+
+small and I believe are negligible in relative cancellations or depature delays. Also 
+
+Engine type was not statistically signifcant in determining either depature delays or
+
+cancelled flights.
+
+(reference to table 3)
